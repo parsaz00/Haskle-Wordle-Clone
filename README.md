@@ -1,4 +1,4 @@
-# CPSC 312 Project
+# CPSC 312 Project.
 
 Project Template for CPSC 312 Projects. Use this for both your proposal and final project submission.
 
