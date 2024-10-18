@@ -20,11 +20,11 @@ This project is in fulfillment of the [CPSC 312 2024W1 project requirements](htt
 
 Our team is:
 
-+ Team Member Name 1 (student # 1): optional awesome nickname 1
-+ Team Member Name 2 (student # 2): optional awesome nickname 2
-+ Team Member Name 3 (student # 3): optional awesome nickname 3
-+ If you have a fourth member: Team Member Name 4 (student # 4): optional awesome nickname 4
-+ If you have a fifth member: Team Member Name 5 (student # 5): optional awesome nickname 5
++ Team Member Name 1 (student # 84226935): optional awesome nickname 1
++ Team Member Name 2 (student # 71746598): optional awesome nickname 2
++ Team Member Name 3 (student # 51913747): optional awesome nickname 3
++ If you have a fourth member: Team Member Name 4 (student # 47253539): optional awesome nickname 4
++ If you have a fifth member: Team Member Name 5 (student # 51399111): optional awesome nickname 5
 
 We call ourselves: optional awesome team name.
 
