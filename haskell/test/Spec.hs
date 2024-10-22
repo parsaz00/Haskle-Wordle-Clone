@@ -1,7 +1,8 @@
-module Spec where
+module Main where
 
+import GameLogic (checkGuess)
 import Test.Hspec
-import Main (checkGuess)
+
 
 main :: IO ()
 main = hspec $ do
@@ -13,4 +14,10 @@ main = hspec $ do
       checkGuess "haskell" "zzzzzzz" `shouldBe` replicate 7 'X'
 
     it "Returns 'O' for correct letters in wrong positions" $ do
-      checkGuess "haskell" "kashlel" `shouldBe` "O@O@@O@"
+      checkGuess "haskell" "kashlel" `shouldBe` "O@@OOO@"
+    
+    it "Returns correct response when guess length is shorted than target" $ do
+      checkGuess "haskell" "a" `shouldBe` "guess is too short"
+    
+    it "Returns correct response when guess length is longer than target" $ do
+      checkGuess "haskell" "aasdfadsfasdfasdfasdf" `shouldBe` "guess is too long"
