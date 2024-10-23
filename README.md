@@ -6,7 +6,7 @@ This project is in fulfillment of the [CPSC 312 2024W1 project requirements](htt
 Our team is:
 
 + Daichi Furukawa (student # 51399111)
-+ Team Member Name 2 (student # 71746598): optional awesome nickname 2
++ Yuvraj Upadhyay (student # 47253539): theonewhocanread
 + Amar Gill (student # 51913747)
 + If you have a fourth member: Team Member Name 4 (student # 47253539): optional awesome nickname 4
 + If you have a fifth member: Team Member Name 5 (student # 51399111): optional awesome nickname 5
