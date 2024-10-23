@@ -1,17 +1,23 @@
-import Lib
-import Test.Tasty
-import Test.Tasty.HUnit
+module Main where
+
+import GameLogic (checkGuess)
+import Test.Hspec
+
 
 main :: IO ()
-main = defaultMain $ testGroup "Tests" $
-  [ testCase "Addition works" $ do
-      2 + 3 @?= 5  -- actual @?= expected
-  , testCase "Multiplication works" $ do
-      6 @=? 2 * 3  -- expected @=? actual
-  -- NOTE: Uncomment this to see what a failing assertion looks like:
-  -- , testCase "Bad assertion" $ do
-  --     1 @?= 2
-  -- NOTE: This is how to explicitly assert failures:
-  -- , testCase "Explicit failure" $ do
-  --     assertFailure "BOOM!"
-  ]
+main = hspec $ do
+  describe "Wordle Guess Checker" $ do
+    it "Returns '@' for correct letters in correct positions" $ do
+      checkGuess "haskell" "haskell" `shouldBe` replicate 7 '@'
+
+    it "Returns 'X' for incorrect letters" $ do
+      checkGuess "haskell" "zzzzzzz" `shouldBe` replicate 7 'X'
+
+    it "Returns 'O' for correct letters in wrong positions" $ do
+      checkGuess "haskell" "kashlel" `shouldBe` "O@@OOO@"
+    
+    it "Returns correct response when guess length is shorted than target" $ do
+      checkGuess "haskell" "a" `shouldBe` "guess is too short"
+    
+    it "Returns correct response when guess length is longer than target" $ do
+      checkGuess "haskell" "aasdfadsfasdfasdfasdf" `shouldBe` "guess is too long"

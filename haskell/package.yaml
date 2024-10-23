@@ -1,33 +1,39 @@
-# TODO: Replace `my-project` everywhere in this file with your project name.
-name:                my-project
+name:                wordle-game
 version:             0.1.0.0
 
 dependencies:
-- base
+- base >= 4.7 && < 5
+- hspec
 
 library:
-  source-dirs: src
+  source-dirs:
+    - src
+  exposed-modules:
+    - GameLogic
 
 executables:
-  my-project-exe:
-    main:                Main.hs
-    source-dirs:         app
+  wordle-game-exe:
+    main: Main.hs
+    source-dirs:
+      - app
+      - src
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - my-project
+      - wordle-game
 
 tests:
-  my-project-test:
-    main:                Spec.hs
-    source-dirs:         test
+  wordle-game-test:
+    main: Spec.hs
+    source-dirs:
+      - test
+      - src
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - my-project
-    - tasty
-    - tasty-hunit
+      - wordle-game
+      - hspec
