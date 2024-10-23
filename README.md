@@ -8,8 +8,8 @@ Our team is:
 + Daichi Furukawa (student # 51399111)
 + Yuvraj Upadhyay (student # 47253539): theonewhocanread
 + Amar Gill (student # 51913747)
-+ Parsa Seyed Zehtab # 84226935
-+ If you have a fifth member: Team Member Name 5 (student # 51399111): optional awesome nickname 5
++ Parsa Seyed Zehtab # (student #84226935)
++ Tovar Montana (student # 71746598)
 + We call ourselves: The Wordlers!
 
 # Acknowledgments
@@ -66,7 +66,6 @@ Our proof-of-concept brings to life the core of what makes Wordle-like games so 
   + @ for letters that are in the right spot.
 
 ## How to Test and Run the Proof of Concept: (** TODO **)
-**TODO**
 Testing the proof-of-concept is simple and fun! Here’s how to try it out:
 1. Clone the repository from GitHub using HTTPS: git clone https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
 2. Open a terminal and navigate to the project directory, it will be called cpsc-312-project
