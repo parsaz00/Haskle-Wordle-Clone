@@ -95,3 +95,9 @@ Link 3: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8
 
 Here we hardcode the target word. Then we run the game. After the round ends, the user can decide (y/n) if they want to play again. If they do, the function recurisively calls itself to restart the game (with the same word for now). If the user chooses n then the game ends and we give them thanks for playing our game. 
 
+
+src/GameLogic.hs
+Link 1: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L6
+
+This is the core logic for our POC. First we check the length of the guess against the length of the target. If it is too [short](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L8) or [too](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L9) long, we let the user know 
+
