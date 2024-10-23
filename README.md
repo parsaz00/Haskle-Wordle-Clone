@@ -78,7 +78,7 @@ Testing the proof-of-concept is simple and fun! Here’s how to try it out:
 + The code behind this feedback system can be found here. With this interactive proof-of-concept, you’ll immediately see how the core game works, and how it responds to your input.
 6. To run the test code do, run `stack test`
 
-## Links to the critical pieces of the code (** TODO **)
+## Links to the critical pieces of the code 
 app/Main.hs
 
 This is where we create our command line interface wordle game. 
