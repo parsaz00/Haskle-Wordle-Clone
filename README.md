@@ -16,7 +16,7 @@ Our team is:
 We received valuable support from various resources:
 
 + We used Hoogle to explore standard Haskell libraries, especially for string manipulation and I/O functions.
-+ Github Copilot / ChatGPT was used to generate initial code snippets, particularly for validating user input and managing game loops.
++ We were using https://hspec.github.io/ doc to create our tests
 + The CPSC 312 Teaching Assistants provided feedback on game design and debugging... Eventually!
 
 ## Product Pitch
