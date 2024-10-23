@@ -17,7 +17,7 @@ We received valuable support from various resources:
 
 + We used Hoogle to explore standard Haskell libraries, especially for string manipulation and I/O functions.
 + Github Copilot / ChatGPT was used to generate initial code snippets, particularly for validating user input and managing game loops.
-+ The CPSC 312 Teaching Assistants provided feedback on game design and debugging. (Eventually)
++ The CPSC 312 Teaching Assistants provided feedback on game design and debugging... Eventually!
 
 ## Product Pitch
 In a world filled with fast-paced, high-tech games, sometimes all you need is a simple, brain-teasing challenge to keep your mind sharp and entertained. That’s where our terminal-based version of Wordle comes in—a minimalist yet addictive word-guessing game that brings all the fun and strategy of the original to your fingertips. Our project isn’t just about recreating Wordle—it’s about delivering a clean, streamlined experience where the game mechanics shine through the power of Haskell’s functional programming, making every guess feel intuitive and every win that much more satisfying.
