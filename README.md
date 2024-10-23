@@ -103,3 +103,12 @@ Link 1: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8
 This is the core logic for our POC. First we check the length of the guess against the length of the target. If it is too [short](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L8) or [too](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L9) long, we let the user know. 
 
 If the guess is the same length as the target, we use the map function and zip function to compare each letter in the target against each letter in the guess with our helper funciton [checkLetter](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L12) . We especially take advantage of the zip function, which we discovered; it allows us to combine the target and guess strings into a list of tuples, where each tuple contains a pair of corresponding letters from the two strings. Then we can compare them using map and checkLetter, and generate the feedback. 
+
+test/Spec.hs
+
+We use the Hspec testing framework to define and run our tests. 
+
+The [describe](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/test/Spec.hs#L9) block groups tests that are all related to our Worldle guess checking logic. 
+Each test case is defined using the **it** function and it shows the individual behaviour we want to test. 
+
+One of the reasons we chose Hspec is because of the syntax (such as describe and it) which makes our test code easy to read. We also wanted to focus on behaviour driven style tests as this is just a POC. 
