@@ -54,7 +54,7 @@ By focusing on these language features, we’re ensuring that our MVP isn’t ju
 ## Importance of this MVP: 
 This MVP is designed to tackle the most critical aspects of the game while giving us room to grow and refine the experience. It’s the foundation on which we’ll build a more polished, feature-rich version of Wordle. The minimal viable product will be functional, fun, and demonstrate Haskell’s strengths to create interactive games!
 
-# Proof of Concept (** TODO **)
+# Proof of Concept
 Our proof-of-concept brings to life the core of what makes Wordle-like games so addictively fun: the feedback loop. This feedback mechanism is the beating heart of the project—it takes the player’s guess, compares it to the hidden word, and delivers instant feedback in a clear and playful way. Every interaction hinges on this system, so it’s absolutely essential to get it right. And we have.
 
 ## Key Focus:
@@ -65,7 +65,7 @@ Our proof-of-concept brings to life the core of what makes Wordle-like games so 
   + O for letters that are in the word but misplaced, and
   + @ for letters that are in the right spot.
 
-## How to Test and Run the Proof of Concept: (** TODO **)
+## How to Test and Run the Proof of Concept:
 Testing the proof-of-concept is simple and fun! Here’s how to try it out:
 1. Clone the repository from GitHub using HTTPS: git clone https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
 2. Open a terminal and navigate to the project directory, it will be called cpsc-312-project
@@ -78,7 +78,7 @@ Testing the proof-of-concept is simple and fun! Here’s how to try it out:
 6. To run the test code do, run `stack test`
 
 ## Links to the critical pieces of the code 
-app/Main.hs
+[app/Main.hs](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/main/haskell/app/Main.hs)
 
 This is where we create our command line interface wordle game. 
 
