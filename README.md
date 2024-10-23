@@ -8,7 +8,7 @@ Our team is:
 + Daichi Furukawa (student # 51399111)
 + Yuvraj Upadhyay (student # 47253539): theonewhocanread
 + Amar Gill (student # 51913747)
-+ If you have a fourth member: Team Member Name 4 (student # 47253539): optional awesome nickname 4
++ Parsa Seyed Zehtab # 84226935
 + If you have a fifth member: Team Member Name 5 (student # 51399111): optional awesome nickname 5
 + We call ourselves: The Wordlers!
 
