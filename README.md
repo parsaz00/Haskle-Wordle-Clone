@@ -68,14 +68,30 @@ Our proof-of-concept brings to life the core of what makes Wordle-like games so 
 ## How to Test and Run the Proof of Concept: (** TODO **)
 **TODO**
 Testing the proof-of-concept is simple and fun! Here’s how to try it out:
-
-1. Clone the repository from GitHub: Link to Repo.
-2. Open a terminal and navigate to the project directory.
+1. Clone the repository from GitHub using HTTPS: git clone https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
+2. Open a terminal and navigate to the project directory, it will be called cpsc-312-project
 3. Compile and run the code with the following commands:
-`ghc --make Main.hs`
-4. Enter a word guess when prompted, and see the instant feedback—watch the letters get marked as X, O, or @!
+`stack clean`
+`stack build`
+`stack exec wordle-game-exe`
+5. Enter a word guess when prompted, and see the instant feedback—watch the letters get marked as X, O, or @! If your input is shorter than the length of the correct answer, or wronger, the program will tell you and you will have to play again!
 + The code behind this feedback system can be found here. With this interactive proof-of-concept, you’ll immediately see how the core game works, and how it responds to your input.
+6. To run the test code do, run `stack test`
 
 ## Links to the critical pieces of the code (** TODO **)
-+ Example - [evaluation method](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project-8258/tree/main) 
+app/Main.hs
+
+This is where we create our command line interface wordle game. 
+
+Link 1: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/app/Main.hs#L3
+
+System.IO is handling input output, GameLogic is where we actually designed the logic that checks guesses against the target word
+
+Link 2: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/app/Main.hs#L8
+
+This function will run one round of of the game. It asks a user for their guess and stores it. The checkGuess function is then called to generate feedback. The feedback is then printed back out to the user. If the feedback is all @ symbols, we congratulate the player for getting the question right. 
+
+Link 3: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/app/Main.hs#L19
+
+Here we hardcode the target word. Then we run the game. After the round ends, the user can decide (y/n) if they want to play again. If they do, the function recurisively calls itself to restart the game (with the same word for now). If the user chooses n then the game ends and we give them thanks for playing our game. 
 
