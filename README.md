@@ -17,6 +17,7 @@ We received valuable support from various resources:
 
 + We used Hoogle to explore standard Haskell libraries, especially for string manipulation and I/O functions.
 + We were using https://hspec.github.io/ doc to create our tests and to learn more about Hspec.
++ Found zip function and how to use it through http://www.zvon.org/other/haskell/Outputprelude/zip_f.html
 + The CPSC 312 Teaching Assistants provided feedback on game design and debugging... Eventually!
 
 ## Product Pitch
