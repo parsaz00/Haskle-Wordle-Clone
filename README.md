@@ -10,13 +10,13 @@ Our team is:
 + Amar Gill (student # 51913747)
 + Parsa Seyed Zehtab # (student #84226935)
 + Tovar Montana (student # 71746598)
-+ We call ourselves: The Wordlers!
++ We call ourselves: The Hasklers!
 
 # Acknowledgments
 We received valuable support from various resources:
 
 + We used Hoogle to explore standard Haskell libraries, especially for string manipulation and I/O functions.
-+ We were using https://hspec.github.io/ doc to create our tests and learn Hspec
++ We were using https://hspec.github.io/ doc to create our tests and to learn more about Hspec.
 + The CPSC 312 Teaching Assistants provided feedback on game design and debugging... Eventually!
 
 ## Product Pitch
@@ -50,9 +50,6 @@ We also plan to harness Haskell’s IO monad to handle user input/output cleanly
 While we’re already familiar with basic recursion and pattern matching, handling side effects (like user input/output) in Haskell is a new challenge for us. The MVP will explore how to elegantly manage game state and feedback in a functional way, without relying on the mutable state seen in other languages. We’ll dive deeper into monads, which opens up learning opportunities to better understand how Haskell separates pure functions from actions like reading input.
 
 By focusing on these language features, we’re ensuring that our MVP isn’t just a stepping stone to the final game—it’s a meaningful project that highlights Haskell's capabilities while giving us a deeper appreciation of its functional programming principles!
-
-## Importance of this MVP: 
-This MVP is designed to tackle the most critical aspects of the game while giving us room to grow and refine the experience. It’s the foundation on which we’ll build a more polished, feature-rich version of Wordle. The minimal viable product will be functional, fun, and demonstrate Haskell’s strengths to create interactive games!
 
 # Proof of Concept
 Our proof-of-concept brings to life the core of what makes Wordle-like games so addictively fun: the feedback loop. This feedback mechanism is the beating heart of the project—it takes the player’s guess, compares it to the hidden word, and delivers instant feedback in a clear and playful way. Every interaction hinges on this system, so it’s absolutely essential to get it right. And we have.
@@ -95,7 +92,7 @@ Link 3: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8
 Here we hardcode the target word. Then we run the game. After the round ends, the user can decide (y/n) if they want to play again. If they do, the function recurisively calls itself to restart the game (with the same word for now). If the user chooses n then the game ends and we give them thanks for playing our game. 
 
 
-src/GameLogic.hs
+[src/GameLogic.hs](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/main/haskell/src/GameLogic.hs)
 
 Link 1: https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L6
 
@@ -103,7 +100,7 @@ This is the core logic for our POC. First we check the length of the guess again
 
 If the guess is the same length as the target, we use the map function and zip function to compare each letter in the target against each letter in the guess with our helper funciton [checkLetter](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/01f24c8d7c6c8453c62e886a0094c5a42ae94196/haskell/src/GameLogic.hs#L12) . We especially take advantage of the zip function, which we discovered; it allows us to combine the target and guess strings into a list of tuples, where each tuple contains a pair of corresponding letters from the two strings. Then we can compare them using map and checkLetter, and generate the feedback. 
 
-test/Spec.hs
+[test/Spec.hs](https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/main/haskell/test/Spec.hs)
 
 We use the Hspec testing framework to define and run our tests. 
 
