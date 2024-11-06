@@ -2,6 +2,10 @@
 %                             (2): https://stackoverflow.com/questions/33852800/how-to-run-plunit-tests-in-prolog
 %                             (3): https://pbrown.me/blog/swi_prolog_unit_testing_env/
 
+%How to run... copy paste these one by one and run:
+% (1) swipl
+% (2) [medical_diagnosis_test].
+% (3) run_tests.
 % medical_diagnosis_test.pl
 
 % Load the plunit library
