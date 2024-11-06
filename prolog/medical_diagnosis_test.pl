@@ -28,6 +28,10 @@ test(flu) :-
 test(allergy) :-
     start_diagnosis_test([sneezing, itchy_eyes], [allergy]).
 
+% Test ebola diagnosis
+test(ebola) :-
+    start_diagnosis_test([fever, weakness, diarrhea, vomiting], [ebola]).
+
 % Test no diagnosis
 test(no_diagnosis) :-
     start_diagnosis_test([headache], []).

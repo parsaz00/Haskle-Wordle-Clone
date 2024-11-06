@@ -26,11 +26,16 @@ symptom(flu, sore_throat).
 symptom(flu, body_aches).
 symptom(allergy, sneezing).
 symptom(allergy, itchy_eyes).
+symptom(ebola, fever).
+symptom(ebola, weakness).
+symptom(ebola, diarrhea).
+symptom(ebola, vomiting).
 
 % Basic diagnosis rules based on symptom combinations
 diagnosis(common_cold) :- has_symptom(cough), has_symptom(runny_nose).
 diagnosis(flu) :- has_symptom(fever), has_symptom(cough), has_symptom(sore_throat), has_symptom(body_aches).
 diagnosis(allergy) :- has_symptom(sneezing), has_symptom(itchy_eyes).
+diagnosis(ebola) :- has_symptom(fever), has_symptom(weakness), has_symptom(diarrhea), has_symptom(vomiting).
 
 
 % Start diagnosis process
