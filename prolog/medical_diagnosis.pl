@@ -4,6 +4,15 @@
 % (4) run command: start_diagnosis.
 % (5) enter symptoms as a list
 
+% CITATIONS:
+% (1) how to write in prolog: https://www.educba.com/prolog-write/
+% (2) block of code below from chat gpt to help 
+
+% findall(Condition, diagnosis(Condition), Conditions),
+%     (Conditions = [] ->
+%         write('No diagnosis could be made with the given symptoms.');
+%         write('Based on your symptoms, you may have: '), write(Conditions)), nl.
+
 
 % Define symptoms associated with each diagnosis
 symptom(common_cold, cough).
