@@ -22,7 +22,7 @@ test(common_cold) :-
 
 % Test flu diagnosis
 test(flu) :-
-    start_diagnosis_test([fever, cough], [flu]).
+    start_diagnosis_test([fever, cough, sore_throat, body_aches], [flu]).
 
 % Test allergy diagnosis
 test(allergy) :-
@@ -49,9 +49,11 @@ start_diagnosis_test(Symptoms, ExpectedConditions) :-
 
 % Test symptom assertion
 test(assert_symptoms) :-
-    assert_symptoms([fever, cough]),
+    assert_symptoms([fever, cough, sore_throat, body_aches]),
     has_symptom(fever),
     has_symptom(cough),
+    has_symptom(sore_throat),
+    has_symptom(body_aches),
     clear_symptoms.
 
 % Test symptom clearing
@@ -59,7 +61,9 @@ test(clear_symptoms) :-
     assert_symptoms([fever, cough]),
     clear_symptoms,
     \+ has_symptom(fever),
-    \+ has_symptom(cough).
+    \+ has_symptom(cough),
+    \+ has_symptom(sore_throat),
+    \+ has_symptom(body_aches).
 
 % Test multiple conditions (if symptoms overlap)
 test(multiple_conditions) :-

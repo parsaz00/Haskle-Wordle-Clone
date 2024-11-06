@@ -1,6 +1,6 @@
 %HOW TO RUN: (1) load make sure you are in the correct directory 
 % (2) swipl command 
-% (3) load the program: [medical_diagnosis.pl].
+% (3) load the program: [medical_diagnosis].
 % (4) run command: start_diagnosis.
 % (5) enter symptoms as a list
 
@@ -22,12 +22,14 @@ symptom(common_cold, cough).
 symptom(common_cold, runny_nose).
 symptom(flu, fever).
 symptom(flu, cough).
+symptom(flu, sore_throat).
+symptom(flu, body_aches).
 symptom(allergy, sneezing).
 symptom(allergy, itchy_eyes).
 
 % Basic diagnosis rules based on symptom combinations
 diagnosis(common_cold) :- has_symptom(cough), has_symptom(runny_nose).
-diagnosis(flu) :- has_symptom(fever), has_symptom(cough).
+diagnosis(flu) :- has_symptom(fever), has_symptom(cough), has_symptom(sore_throat), has_symptom(body_aches).
 diagnosis(allergy) :- has_symptom(sneezing), has_symptom(itchy_eyes).
 
 
