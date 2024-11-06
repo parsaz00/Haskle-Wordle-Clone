@@ -30,13 +30,17 @@ symptom(ebola, fever).
 symptom(ebola, weakness).
 symptom(ebola, diarrhea).
 symptom(ebola, vomiting).
+symptom(plague, fever).
+symptom(plague, headache).
+symptom(plague, chills).
+symptom(plague, buboes).
 
 % Basic diagnosis rules based on symptom combinations
 diagnosis(common_cold) :- has_symptom(cough), has_symptom(runny_nose).
 diagnosis(flu) :- has_symptom(fever), has_symptom(cough), has_symptom(sore_throat), has_symptom(body_aches).
 diagnosis(allergy) :- has_symptom(sneezing), has_symptom(itchy_eyes).
 diagnosis(ebola) :- has_symptom(fever), has_symptom(weakness), has_symptom(diarrhea), has_symptom(vomiting).
-
+diagnosis(plague) :- has_symptom(fever), has_symptom(headache), has_symptom(chills), has_symptom(buboes).
 
 % Start diagnosis process
 start_diagnosis :-

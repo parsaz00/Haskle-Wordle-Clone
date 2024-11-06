@@ -32,6 +32,10 @@ test(allergy) :-
 test(ebola) :-
     start_diagnosis_test([fever, weakness, diarrhea, vomiting], [ebola]).
 
+% Test plague diagnosis
+test(plague) :-
+    start_diagnosis_test([fever, headache, chills, buboes], [plague]).
+
 % Test no diagnosis
 test(no_diagnosis) :-
     start_diagnosis_test([headache], []).
