@@ -13,6 +13,9 @@
 %         write('No diagnosis could be made with the given symptoms.');
 %         write('Based on your symptoms, you may have: '), write(Conditions)), nl.
 
+% Declare has_symptom/1 as a dynamic predicate
+:- dynamic has_symptom/1.
+
 
 % Define symptoms associated with each diagnosis
 symptom(common_cold, cough).
