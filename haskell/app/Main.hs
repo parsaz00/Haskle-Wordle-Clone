@@ -1,7 +1,6 @@
 module Main where
 
 import System.IO (hFlush, stdout)
-import Data.List (elemIndex)
 import GameLogic (checkGuess)
 
 -- Function to run one round of the game
