@@ -34,6 +34,14 @@ symptom(plague, fever).
 symptom(plague, headache).
 symptom(plague, chills).
 symptom(plague, buboes).
+symptom(diabetes, thirsty).
+symptom(diabetes, hungry).
+symptom(diabetes, fatigue).
+symptom(cellulitis, swelled_skin).
+symptom(cellulitis, red_skin).
+symptom(cellulitis, fever).
+symptom(cellulitis, elevated_white_blood_cell_count).
+
 
 % Basic diagnosis rules based on symptom combinations
 diagnosis(common_cold) :- has_symptom(cough), has_symptom(runny_nose).
@@ -41,6 +49,8 @@ diagnosis(flu) :- has_symptom(fever), has_symptom(cough), has_symptom(sore_throa
 diagnosis(allergy) :- has_symptom(sneezing), has_symptom(itchy_eyes).
 diagnosis(ebola) :- has_symptom(fever), has_symptom(weakness), has_symptom(diarrhea), has_symptom(vomiting).
 diagnosis(plague) :- has_symptom(fever), has_symptom(headache), has_symptom(chills), has_symptom(buboes).
+diagnosis(diabetes) :- has_symptom(thirsty), has_symptom(hungry), has_symptom(fatigue).
+diagnosis(cellulitis) :- has_symptom(swelled_skin), has_symptom(red_skin), has_symptom(fever), has_symptom(elevated_white_blood_cell_count).
 
 % Start diagnosis process
 start_diagnosis :-
