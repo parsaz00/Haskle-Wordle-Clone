@@ -36,6 +36,14 @@ test(ebola) :-
 test(plague) :-
     start_diagnosis_test([fever, headache, chills, buboes], [plague]).
 
+% Test diabetes diagnosis
+test(diabetes) :-
+    start_diagnosis_test([thirsty, hungry, chills, fatigue], [diabetes]).
+
+% Test cellulitis diagnosis
+test(cellulitis) :-
+    start_diagnosis_test([swelled_skin, red_skin, fever, elevated_white_blood_cell_count], [cellulitis]).
+
 % Test no diagnosis
 test(no_diagnosis) :-
     start_diagnosis_test([headache], []).
