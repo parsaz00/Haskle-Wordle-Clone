@@ -87,13 +87,13 @@ symptom(tension_headache, fatigue).
 
 % Diagnosis rules for each condition based on symptom combinations
 diagnosis(common_cold) :- has_symptom(runny_nose), has_symptom(sore_throat), has_symptom(cough), has_symptom(sneezing).
-diagnosis(flu) :- has_symptom(fever), has_symptom(chills), has_symptom(body_aches), has_symptom(fatigue), has_symptom(cough), has_symptom(sore_throat).
+diagnosis(flu) :- has_symptom(fever), has_symptom(cough).
 diagnosis(allergies) :- has_symptom(runny_nose), has_symptom(sneezing), has_symptom(itchy_eyes), has_symptom(nasal_congestion).
 diagnosis(strep_throat) :- has_symptom(sore_throat), has_symptom(fever), has_symptom(swollen_lymph_nodes), has_symptom(headache).
 diagnosis(covid) :- has_symptom(fever), has_symptom(dry_cough), has_symptom(shortness_of_breath), has_symptom(fatigue), has_symptom(loss_of_taste_or_smell).
 diagnosis(migraine) :- has_symptom(headache), has_symptom(nausea), has_symptom(sensitivity_to_light), has_symptom(sensitivity_to_sound).
 diagnosis(gastroenteritis) :- has_symptom(nausea), has_symptom(vomiting), has_symptom(diarrhea), has_symptom(stomach_cramps), has_symptom(fever).
-diagnosis(pneumonia) :- has_symptom(cough), has_symptom(fever), has_symptom(shortness_of_breath), has_symptom(chest_pain), has_symptom(fatigue).
+diagnosis(pneumonia) :- has_symptom(cough), has_symptom(fever), has_symptom(shortness_of_breath), has_symptom(fatigue).
 diagnosis(bronchitis) :- has_symptom(cough), has_symptom(mucus_production), has_symptom(fatigue), has_symptom(shortness_of_breath), has_symptom(chest_discomfort).
 diagnosis(sinusitis) :- has_symptom(facial_pain), has_symptom(nasal_congestion), has_symptom(headache), has_symptom(loss_of_smell), has_symptom(sore_throat).
 diagnosis(asthma) :- has_symptom(shortness_of_breath), has_symptom(wheezing), has_symptom(chest_tightness), has_symptom(cough).
@@ -101,37 +101,78 @@ diagnosis(toothache) :- has_symptom(pain), has_symptom(swelling), has_symptom(se
 diagnosis(heartburn) :- has_symptom(burning_sensation), has_symptom(chest_pain), has_symptom(sour_taste), has_symptom(difficulty_swallowing), has_symptom(throat_irritation).
 diagnosis(tension_headache) :- has_symptom(dull_headache), has_symptom(tightness), has_symptom(scalp_tenderness), has_symptom(neck_pain), has_symptom(fatigue).
 
+
+% Get all unique diseases from the symptom/2 facts
+disease(Disease) :-
+    symptom(Disease, _).
+    
 % Start diagnosis process
 start_diagnosis :-
     write('Please enter your symptoms separated by commas (e.g., fever, cough): '), nl,
-    read_line_to_string(user_input, Input),      
-    split_string(Input, ",", " ", SymptomStrings), 
-    maplist(string_to_atom, SymptomStrings, Symptoms), 
-    assert_symptoms(Symptoms),                    
-    diagnose,
-    clear_symptoms.
+    read_line_to_string(user_input, Input),
+    split_string(Input, ",", " ", SymptomStrings),
+    maplist(string_to_atom, SymptomStrings, Symptoms),
+    diagnose(Symptoms).
 
-% Assert each symptom as a fact
+% Count matching symptoms for a disease
+count_matching_symptoms(Disease, Symptoms, Count) :-
+    findall(Symptom, symptom(Disease, Symptom), DiseaseSymptoms),
+    intersection(Symptoms, DiseaseSymptoms, MatchingSymptoms),
+    length(MatchingSymptoms, Count).
+
+% Suggest possible diagnoses based on current symptoms
+suggest_diagnosis(Symptoms) :-
+    findall(Disease-Count,
+        (disease(Disease), count_matching_symptoms(Disease, Symptoms, Count), Count > 0),
+        DiagnosisCounts),
+    list_to_set(DiagnosisCounts, UniqueDiagnosisCounts),
+    sort(2, @>=, UniqueDiagnosisCounts, SortedDiagnosisCounts),
+    write('Based on your symptoms, it could be one of the following conditions:'), nl,
+    display_possible_diagnoses(SortedDiagnosisCounts),
+    prompt_for_more_symptoms.
+
+
+% Display possible diagnoses
+display_possible_diagnoses([]) :-
+    write('No conditions matched your symptoms.'), nl.
+display_possible_diagnoses([Disease-Count | Rest]) :-
+    format('~w (matching ~d symptoms)~n', [Disease, Count]),
+    display_possible_diagnoses(Rest).
+
+% Main diagnosis function
+diagnose(Symptoms) :-
+    retractall(has_symptom(_)),
+    assert_symptoms(Symptoms),
+    findall(Condition, diagnosis(Condition), Conditions),
+    (Conditions = [] ->
+        write('No exact diagnosis could be made with the given symptoms.'), nl,
+        suggest_diagnosis(Symptoms) ;
+        write('Based on your symptoms, you may have: '), nl,
+        print_conditions(Conditions), nl,
+        clear_symptoms).
+
+% Print each condition from the list
+print_conditions([]). % Base case: nothing to print if list is empty
+print_conditions([Condition | Rest]) :-
+    write(Condition), nl,  % Print each condition on a new line
+    print_conditions(Rest).  % Continue printing the rest of the list
+
+% Assert each symptom (for current input only)
 assert_symptoms([]).
 assert_symptoms([Symptom | Rest]) :-
     assert(has_symptom(Symptom)),
     assert_symptoms(Rest).
 
-% Diagnose based on asserted symptoms
-diagnose :-
-    findall(Condition, diagnosis(Condition), Conditions),
-    (Conditions = [] ->
-        write('No diagnosis could be made with the given symptoms.');
-        (write('Based on your symptoms, you may have: '), print_conditions(Conditions))
-    ), nl.
+% Prompt for more symptoms if no exact match
+prompt_for_more_symptoms :-
+    write('To narrow down the diagnosis, please enter more symptoms or type "stop" to finish: '), nl,
+    read_line_to_string(user_input, MoreSymptoms),
+    (MoreSymptoms == "stop" ->
+        write('Diagnosis terminated.'), nl, clear_symptoms ;
+        split_string(MoreSymptoms, ",", " ", SymptomStrings),
+        maplist(string_to_atom, SymptomStrings, NewSymptoms),
+        diagnose(NewSymptoms)).
 
-% Helper predicate to print conditions without brackets
-print_conditions([]).
-print_conditions([Condition]) :- write(Condition).
-print_conditions([Condition | Rest]) :-
-    write(Condition), write(', '),
-    print_conditions(Rest).
-
-% Clear all asserted symptoms after diagnosis
+% Clear all asserted symptoms
 clear_symptoms :-
     retractall(has_symptom(_)).
