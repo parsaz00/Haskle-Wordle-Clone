@@ -11,7 +11,7 @@ Our team is:
 + Amar Gill (student # 51913747)
 + Parsa Seyed Zehtab # (student #84226935)
 + Tovar Montana (student # 71746598)
-+ We call ourselves: The Hasklers!
++ We call ourselves: The Prolog MedExperts!
 
 # Acknowledgments
 We received valuable support from various resources:
