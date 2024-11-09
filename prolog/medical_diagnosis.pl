@@ -1,18 +1,3 @@
-%HOW TO RUN: (1) load make sure you are in the correct directory 
-% (2) swipl command 
-% (3) load the program: [medical_diagnosis].
-% (4) run command: start_diagnosis.
-% (5) enter symptoms as a list
-
-% CITATIONS:
-% (1) how to write in prolog: https://www.educba.com/prolog-write/
-% (2) block of code below from chat gpt to help 
-
-% findall(Condition, diagnosis(Condition), Conditions),
-%     (Conditions = [] ->
-%         write('No diagnosis could be made with the given symptoms.');
-%         write('Based on your symptoms, you may have: '), write(Conditions)), nl.
-
 % Declare has_symptom/1 as a dynamic predicate
 :- dynamic has_symptom/1.
 
