@@ -84,20 +84,20 @@ Our POC showcases the essence of what makes expert systems valuable: logical, ru
 2. Ensure SWI-Prolog is Installed: Verify that SWI-Prolog is installed by running: `swipl --version` 
 
 ## Running the program
-1. **Navigate to the Correct Directory**: Ensure you are in the directory where the medical_diagnosis.pl file is located. <br>
+1. Ensure you are in the directory where the medical_diagnosis.pl file is located. <br>
 `cd /path/to/your/directory`
 
-2. **Start SWI-Prolog**: Launch the SWI-Prolog interpreter by running: `swipl` 
+2. Launch the SWI-Prolog interpreter by running: `swipl` 
 
-3. **Load the Program**: Load the `medical_diagnosis.pl` file into the Prolog interpreter: `?- [medical_diagnosis].` 
+3. Load the `medical_diagnosis.pl` file into the Prolog interpreter: `?- [medical_diagnosis].` 
 
-4. **Start the Diagnosis**: To begin the diagnosis, enter: `?- start_diagnosis.` <br>
+5. To begin the diagnosis, enter: `?- start_diagnosis.` <br>
 
-5. **Input Symptoms**: Enter your symptoms as a comma-separated list (e.g., fever, cough, fatigue). The program will suggest potential diagnoses based on the symptoms provided.
+6. Enter your symptoms as a comma-separated list (e.g., fever, cough, fatigue). The program will suggest potential diagnoses based on the symptoms provided.
 + Example:  <br>
 `Please enter your symptoms separated by commas (e.g., fever, cough):`  <br>
 `fever, cough, fatigue`  <br>
-6. **Get Possible Diagnoses**: The program will display the most likely conditions based on the symptoms. If no exact match is found, it will suggest possible diagnoses and prompt for additional symptoms.
+6. The program will display the most likely conditions based on the symptoms. If no exact match is found, it will suggest possible diagnoses and prompt for additional symptoms.
 
 ## Example Run
 `?- start_diagnosis.` <br>
@@ -122,7 +122,7 @@ You can then enter more symptoms to narrow down the diagnosis or type stop to en
 `covid`<br>
 
 ## Troubleshooting
-+ If you encounter an error such as undefined predicate, ensure that the program is properly loaded using `[medical_diagnosis].`.
++ If you encounter an error such as undefined predicate, ensure that the program is properly loaded using `[medical_diagnosis].`
 + If the diagnosis process is not producing any results, double-check the symptoms you are providing. Ensure they match the defined symptom list (e.g., fever, cough, headache).
 
 ## Extending the Knowledge Base
