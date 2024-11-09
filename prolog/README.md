@@ -76,4 +76,14 @@ Our POC showcases the essence of what makes expert systems valuable: logical, ru
 + User interaction and input: The system takes user-entered symptoms through a terminal interface, ensuring ease of use and engagement. 
 + Rule-based diagnosis: Each user-provided symptom is matched against a set of predefined rules representing different conditions 
 + Delivering diagnostic feedback: The system outputs potential diagnoses based on the symptoms provided and highlights how many symptoms match each condition 
-+ Partial matches and suggestions: If an exact diagnosis cannot be made, the system suggests potential conditions that share overlapping symptoms and prompts users to provide more information for better accuracy. 
++ Partial matches and suggestions: If an exact diagnosis cannot be made, the system suggests potential conditions that share overlapping symptoms and prompts users to provide more information for better accuracy.
+
++ 
+# How to run the test code:
+
+1. Clone the repo https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
+2. Open the repo in your preferred IDE
+3. Navigate to the prolog directory `cd prolog`
+4. Run these commands : (1) `swipl` (2) `[medica_diagnosis_test]. (3) `run_tests.`
+
+This will allow you to run the test code we have created using plunit
