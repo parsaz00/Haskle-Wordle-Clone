@@ -70,4 +70,10 @@ Our MVP will set the stage for further development such as:
 
 
 # Proof Of Concept
+Our POC showcases the essence of what makes expert systems valuable: logical, rule-based reasoning that simulates human diagnostic thinking. This diagnostic logic is the foundation of our project - it accepts user symptoms, applies predefined rules, and returns potential diagnoses. The interactive nature of MedExpert helps users understand the relationship between their symptoms and possibe conditions, providing insight and educational value. 
 
+## Key Focus: 
++ User interaction and input: The system takes user-entered symptoms through a terminal interface, ensuring ease of use and engagement. 
++ Rule-based diagnosis: Each user-provided symptom is matched against a set of predefined rules representing different conditions 
++ Delivering diagnostic feedback: The system outputs potential diagnoses based on the symptoms provided and highlights how many symptoms match each condition 
++ Partial matches and suggestions: If an exact diagnosis cannot be made, the system suggests potential conditions that share overlapping symptoms and prompts users to provide more information for better accuracy. 
