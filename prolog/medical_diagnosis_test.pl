@@ -1,100 +1,85 @@
-% Citation: How to use plunit (1): https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)
-%                             (2): https://stackoverflow.com/questions/33852800/how-to-run-plunit-tests-in-prolog
-%                             (3): https://pbrown.me/blog/swi_prolog_unit_testing_env/
-
-%How to run... copy paste these one by one and run:
-% (1) swipl
-% (2) [medical_diagnosis_test].
-% (3) run_tests.
-% medical_diagnosis_test.pl
-
-% Load the plunit library
-:- use_module(library(plunit)).
-
-% Load the main program
-:- consult(medical_diagnosis).
-
 :- begin_tests(medical_diagnosis).
+:- [medical_diagnosis].
 
-% Test common cold diagnosis
+% Test case 1: Common cold diagnosis
 test(common_cold) :-
-    start_diagnosis_test([cough, runny_nose], [common_cold]).
+    retractall(has_symptom(_)),
+    assert(has_symptom(runny_nose)),
+    assert(has_symptom(sore_throat)),
+    assert(has_symptom(cough)),
+    assert(has_symptom(sneezing)),
+    findall(Condition, diagnosis(Condition), Conditions),
+    Conditions == [common_cold].
 
-% Test flu diagnosis
+% Test case 2: Flu diagnosis
 test(flu) :-
-    start_diagnosis_test([fever, cough, sore_throat, body_aches], [flu]).
+    retractall(has_symptom(_)),
+    assert(has_symptom(fever)),
+    assert(has_symptom(chills)),
+    assert(has_symptom(body_aches)),
+    assert(has_symptom(fatigue)),
+    assert(has_symptom(cough)),
+    assert(has_symptom(sore_throat)),
+    findall(Condition, diagnosis(Condition), Conditions),
+    Conditions == [flu].
 
-% Test allergy diagnosis
-test(allergy) :-
-    start_diagnosis_test([sneezing, itchy_eyes], [allergy]).
+% Test case 3: Allergies diagnosis
+test(allergies) :-
+    retractall(has_symptom(_)),
+    assert(has_symptom(runny_nose)),
+    assert(has_symptom(sneezing)),
+    assert(has_symptom(itchy_eyes)),
+    assert(has_symptom(nasal_congestion)),
+    findall(Condition, diagnosis(Condition), Conditions),
+    Conditions == [allergies].
 
-% Test ebola diagnosis
-test(ebola) :-
-    start_diagnosis_test([fever, weakness, diarrhea, vomiting], [ebola]).
+% Test case 4: COVID-19 diagnosis
+test(covid) :-
+    retractall(has_symptom(_)),
+    assert(has_symptom(fever)),
+    assert(has_symptom(dry_cough)),
+    assert(has_symptom(shortness_of_breath)),
+    assert(has_symptom(fatigue)),
+    assert(has_symptom(loss_of_taste_or_smell)),
+    findall(Condition, diagnosis(Condition), Conditions),
+    Conditions == [covid].
 
-% Test plague diagnosis
-test(plague) :-
-    start_diagnosis_test([fever, headache, chills, buboes], [plague]).
-
-% Test diabetes diagnosis
-test(diabetes) :-
-    start_diagnosis_test([thirsty, hungry, chills, fatigue], [diabetes]).
-
-% Test cellulitis diagnosis
-test(cellulitis) :-
-    start_diagnosis_test([swelled_skin, red_skin, fever, elevated_white_blood_cell_count], [cellulitis]).
-
-% Test no diagnosis
+% Test case 5: No diagnosis found
 test(no_diagnosis) :-
-    start_diagnosis_test([headache], []).
+    retractall(has_symptom(_)),
+    assert(has_symptom(unusual_symptom)),
+    findall(Condition, diagnosis(Condition), Conditions),
+    Conditions == [].
 
-% Test partial symptoms (shouldn't trigger diagnosis)
-test(partial_common_cold) :-
-    start_diagnosis_test([cough], []).
+% Test case 6: Multiple matching conditions (e.g., cough and fever could match flu, pneumonia)
+test(multiple_matches) :-
+    retractall(has_symptom(_)),
+    assert(has_symptom(cough)),
+    assert(has_symptom(fever)),
+    assert(has_symptom(fatigue)),
+    assert(has_symptom(chills)),  % Symptom for flu
+    assert(has_symptom(shortness_of_breath)),  % Symptom for pneumonia
+    findall(S, has_symptom(S), AssertedSymptoms),
+    write('Asserted symptoms: '), write(AssertedSymptoms), nl,
+    findall(Condition, diagnosis(Condition), Conditions),
+    write('Conditions found: '), write(Conditions), nl,
+    member(flu, Conditions), !,
+    member(pneumonia, Conditions).
 
-% Test multiple symptoms but no match
-test(multiple_no_match) :-
-    start_diagnosis_test([fever, sneezing], []).
-
-% Helper predicate to run diagnosis tests
-start_diagnosis_test(Symptoms, ExpectedConditions) :-
-    assert_symptoms(Symptoms),
-    findall(Condition, diagnosis(Condition), ActualConditions),
-    clear_symptoms,
-    assertion(ExpectedConditions == ActualConditions).
-
-% Test symptom assertion
-test(assert_symptoms) :-
-    assert_symptoms([fever, cough, sore_throat, body_aches]),
-    has_symptom(fever),
-    has_symptom(cough),
-    has_symptom(sore_throat),
-    has_symptom(body_aches),
-    clear_symptoms.
-
-% Test symptom clearing
-test(clear_symptoms) :-
-    assert_symptoms([fever, cough]),
-    clear_symptoms,
-    \+ has_symptom(fever),
-    \+ has_symptom(cough),
-    \+ has_symptom(sore_throat),
-    \+ has_symptom(body_aches).
-
-% Test multiple conditions (if symptoms overlap)
-test(multiple_conditions) :-
-    % Add temporary symptoms for multiple conditions
-    assert((symptom(test_condition1, symptom1))),
-    assert((symptom(test_condition2, symptom1))),
-    assert((diagnosis(test_condition1) :- has_symptom(symptom1))),
-    assert((diagnosis(test_condition2) :- has_symptom(symptom1))),
-    
-    start_diagnosis_test([symptom1], [test_condition1, test_condition2]),
-    
-    % Clean up temporary symptoms
-    retract((symptom(test_condition1, symptom1))),
-    retract((symptom(test_condition2, symptom1))),
-    retract((diagnosis(test_condition1) :- has_symptom(symptom1))),
-    retract((diagnosis(test_condition2) :- has_symptom(symptom1))).
+% Test case 7: Diagnosis with partial symptoms
+test(partial_symptoms) :-
+    retractall(has_symptom(_)),
+    assert(has_symptom(sneezing)),
+    assert(has_symptom(itchy_eyes)),
+    assert(has_symptom(runny_nose)),
+    assert(has_symptom(nasal_congestion)),
+    assert(has_symptom(sore_throat)),
+    assert(has_symptom(cough)),
+    findall(S, has_symptom(S), AssertedSymptoms),
+    write('Asserted symptoms: '), write(AssertedSymptoms), nl,
+    findall(Condition, diagnosis(Condition), Conditions),
+    write('Conditions found: '), write(Conditions), nl,
+    member(common_cold, Conditions), !,
+    member(allergies, Conditions).
 
 :- end_tests(medical_diagnosis).
