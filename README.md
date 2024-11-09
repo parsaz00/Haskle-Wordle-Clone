@@ -1,1 +1,1 @@
-Prolog Project Proposal README.md: [README.md](./prolog/README.md)
+Prolog Project Proposal README.md: [Prolog README.md](./prolog/README.md)
