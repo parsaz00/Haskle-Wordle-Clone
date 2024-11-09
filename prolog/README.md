@@ -31,11 +31,11 @@ The problem MedExpert solves is both educational and practical: how do we levera
 
 By utilizing Prolog's pattern matching and backtracking capabiliteis, MedExpert provides an interactive experience that challenges users to think about their symptoms and receive potential diagnoses they can explore further. A unique advantage our our design is the fact that it offers transparency in decision-making, giving users not just results but the reasoning behind them. 
 
-MedExpert is designe to engage users who are curious about healthcare and tech. It showcases Prolog's logical depth in a practical setting, offering a user experience that is easy to use and powerful in what it offers. 
+MedExpert is designed to engage users who are curious about healthcare and tech. It showcases Prolog's logical depth in a practical setting, offering a user experience that is easy to use and powerful in what it offers. 
 
 # Minimal Viable Project (MVP)
 
-We aimt ot create a functional diagnostic system that allows users to: 
+We aim to create a functional diagnostic system that allows users to: 
 + Input a list of symptoms through a user friendly GUI
 + Recieve a diagnosis (or multiple) based on the symptoms entered
 + Understand the logic behind each diagnosis through explanatory output
