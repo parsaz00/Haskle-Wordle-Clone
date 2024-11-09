@@ -16,7 +16,8 @@ Our team is:
 # Acknowledgments
 We received valuable support from various resources:
 + We referred to the following site for handling writing and user inputs in prolog: https://www.educba.com/prolog-write/
-+ We used https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27) to help us with unit testing in prolog 
++ We used https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27) to help us with unit testing in prolog
++ We used ChatGPT to help explain some of the concepts for prolog-write for us, and in debugging our start_diagnosis function and prompt_for_more_symptoms function
 
 # Product Pitch 
 In an age where technology plays an ever-increasing role in healthcare, having a system that is intelligent and accessible as a diagnostic tool can bridge the gap between user curiosity and medical advice. MedExpert is a terminal-based medical diagnosis assistant that allows users to input a list of symptoms and recieve potential medical conditions as output. This project is not just a tool, rather, it is a demonstration of how logical reasoning can be used to provide insight into complex problems using Prolog. 
