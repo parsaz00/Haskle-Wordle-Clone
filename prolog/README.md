@@ -78,12 +78,65 @@ Our POC showcases the essence of what makes expert systems valuable: logical, ru
 + Delivering diagnostic feedback: The system outputs potential diagnoses based on the symptoms provided and highlights how many symptoms match each condition 
 + Partial matches and suggestions: If an exact diagnosis cannot be made, the system suggests potential conditions that share overlapping symptoms and prompts users to provide more information for better accuracy.
 
-+ 
+# How to run the program:
+## Set up
+1. Clone the Repository: `git clone https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git`
+2. Ensure SWI-Prolog is Installed: Verify that SWI-Prolog is installed by running: `swipl --version` 
+
+## Running the program
+1. **Navigate to the Correct Directory**: Ensure you are in the directory where the medical_diagnosis.pl file is located. <br>
+`cd /path/to/your/directory`
+
+2. **Start SWI-Prolog**: Launch the SWI-Prolog interpreter by running: `swipl` 
+
+3. **Load the Program**: Load the `medical_diagnosis.pl` file into the Prolog interpreter: `?- [medical_diagnosis].` 
+
+4. **Start the Diagnosis**: To begin the diagnosis, enter: `?- start_diagnosis.` <br>
+
+5. **Input Symptoms**: Enter your symptoms as a comma-separated list (e.g., fever, cough, fatigue). The program will suggest potential diagnoses based on the symptoms provided.
++ Example:  <br>
+`Please enter your symptoms separated by commas (e.g., fever, cough):`  <br>
+`fever, cough, fatigue`  <br>
+6. **Get Possible Diagnoses**: The program will display the most likely conditions based on the symptoms. If no exact match is found, it will suggest possible diagnoses and prompt for additional symptoms.
+
+## Example Run
+`?- start_diagnosis.` <br>
+`Please enter your symptoms separated by commas (e.g., fever, cough):` <br>
+`fever, dry_cough, shortness_of_breath` 
+
+If no exact diagnosis is found:<br>
+`Based on your symptoms, it could be one of the following conditions:`<br>
+`covid (matching 3 symptoms)` <br>
+`pneumonia (matching 2 symptoms)`<br>
+`flu (matching 1 symptoms)`<br>
+`strep_throat (matching 1 symptoms)`<br>
+`gastroenteritis (matching 1 symptoms)`<br>
+`bronchitis (matching 1 symptoms)`<br>
+`asthma (matching 1 symptoms)`<br>
+`No conditions matched your symptoms.`
+
+You can then enter more symptoms to narrow down the diagnosis or type stop to end the process. <br>
+`To narrow down the diagnosis, please enter more symptoms or type "stop" to finish: ` <br>
+`fever, dry_cough, shortness_of_breath, fatigue, loss_of_taste_or_smell`<br>
+`Based on your symptoms, you may have:`<br>
+`covid`<br>
+
+## Troubleshooting
++ If you encounter an error such as undefined predicate, ensure that the program is properly loaded using `[medical_diagnosis].`.
++ If the diagnosis process is not producing any results, double-check the symptoms you are providing. Ensure they match the defined symptom list (e.g., fever, cough, headache).
+
+## Extending the Knowledge Base
++ You can add more medical conditions and symptoms to the knowledge base by defining new `diagnosis/1` rules in the `.pl` file.
+`diagnosis(pneumonia) :-` <br>
+    `  has_symptom(fever),` <br>
+    `  has_symptom(cough),` <br>
+    `  has_symptom(chest_pain).` <br>
+    
 # How to run the test code:
 
 1. Clone the repo https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
 2. Open the repo in your preferred IDE
 3. Navigate to the prolog directory `cd prolog`
-4. Run these commands : (1) `swipl` (2) `[medica_diagnosis_test]. (3) `run_tests.`
+4. Run these commands : (1) `swipl` (2) `[medica_diagnosis_test].` (3) `run_tests.`
 
 This will allow you to run the test code we have created using plunit
