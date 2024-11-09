@@ -85,6 +85,6 @@ Our POC showcases the essence of what makes expert systems valuable: logical, ru
 1. Clone the repo https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
 2. Open the repo in your preferred IDE
 3. Navigate to the prolog directory `cd prolog`
-4. Run these commands : (1) `swipl` (2) `[medica_diagnosis_test]. (3) `run_tests.`
+4. Run these commands : (1) `swipl` (2) `[medica_diagnosis_test].` (3) `run_tests.`
 
 This will allow you to run the test code we have created using plunit
