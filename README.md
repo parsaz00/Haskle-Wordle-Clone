@@ -10,4 +10,4 @@ Our team is:
 + Yuvraj Upadhyay (student # 47253539): theonewhocanread
 + Amar Gill (student # 51913747)
 + Parsa Seyed Zehtab # (student #84226935)
-+ Tovar Montana (student # 71746598)
++ Gabriel Tovar Montana (student # 71746598)
