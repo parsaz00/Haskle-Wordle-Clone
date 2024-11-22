@@ -2,6 +2,7 @@ module Main where
 
 import System.IO (hFlush, stdout)
 import GameLogic (checkGuess)
+import GUI (launchGUI)
 
 -- Function to run one round of the game
 runGame :: String -> IO ()
@@ -26,4 +27,8 @@ playWordle = do
       else putStrLn "Thanks for playing!"
 
 main :: IO ()
-main = playWordle
+-- Terminal based
+-- main = playWordle
+
+-- Gui Based
+main = launchGUI

@@ -4,6 +4,7 @@ version:             0.1.0.0
 dependencies:
 - base >= 4.7 && < 5
 - hspec
+- gtk3
 
 library:
   source-dirs:
@@ -37,3 +38,4 @@ tests:
     dependencies:
       - wordle-game
       - hspec
+    
