@@ -156,7 +156,7 @@ launchGUI = do
     if row >= length labels
       then labelSetText feedbackLabel "Game Over! You've used all your guesses."
       else if length guess /= length targetWord
-        then labelSetText feedbackLabel "Guess must be 7 letters long!"
+        then labelSetText feedbackLabel $ "Guess must be " ++ show (length targetWord) ++ " letters long!"
         else do
           -- Get feedback from the game logic
           let feedback = checkGuess targetWord guess
