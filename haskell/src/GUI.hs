@@ -106,11 +106,11 @@ launchGUI = do
   containerAdd window vbox
 
   -- Create a grid for displaying guesses
-  grid <- tableNew 6 5 True
+  grid <- tableNew 6 7 True
   boxPackStart vbox grid PackGrow 0
 
   -- Populate the grid with empty labels
-  labels <- mapM (mapM (\_ -> labelNew (Just "_"))) (replicate 6 (replicate 5 ()))
+  labels <- mapM (mapM (\_ -> labelNew (Just "_"))) (replicate 6 (replicate 7 ()))
   zipWithM_ (\row rowWidgets -> zipWithM_ (\col widget -> tableAttachDefaults grid widget col (col+1) row (row+1)) [0..] rowWidgets) [0..] labels
 
   -- Add a text entry for guesses
