@@ -9,7 +9,7 @@ Our team is:
 + Yuvraj Upadhyay (student # 47253539): theonewhocanread
 + Amar Gill (student # 51913747)
 + Parsa Seyed Zehtab # (student #84226935)
-+ Tovar Montana (student # 71746598)
++ Gabriel Tovar Montana (student # 71746598)
 + We call ourselves: The Hasklers!
 
 # Acknowledgments
@@ -35,7 +35,7 @@ The problem we’re solving is deceptively simple: how do we provide people with
 This is more than just a game—it’s a problem-solving exercise disguised as entertainment, and it’s built for anyone looking to challenge their brain while having a little fun. Whether you’re a seasoned word-game enthusiast or someone looking to kill a few minutes, this project has something for you.
 
 # Minimal Viable Project (MVP)
-We aims to create a fully functional version of the core Wordle gameplay loop, where users can guess a hidden word, receive instant feedback, and either win or lose based on their guesses. We’ll focus on three key areas:
+We aim to create a fully functional version of the core Wordle gameplay loop, where users can guess a hidden word, receive instant feedback, and either win or lose based on their guesses. We’ll focus on three key areas:
 
 1. Reading and processing user input: This will allow players to interact with the game naturally through a terminal interface.
 2. Implementing the feedback system: Each letter in the player’s guess will be compared to the hidden word, generating feedback that is both clear and accurate using pattern matching and recursion.
