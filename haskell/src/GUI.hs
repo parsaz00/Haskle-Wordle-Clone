@@ -89,6 +89,7 @@ import Graphics.UI.Gtk
 import GameLogic (checkGuess)
 import Control.Monad (zipWithM_, when)
 import Data.IORef
+import System.Random (randomRIO)
 
 -- Main function to launch the GUI
 launchGUI :: IO ()
@@ -119,6 +120,13 @@ launchGUI = do
   -- Add a submit button
   submitButton <- buttonNewWithLabel "Submit"
   boxPackStart vbox submitButton PackNatural 10
+
+  -- Add a hint button
+  hintButton <- buttonNewWithLabel "Hint"
+  boxPackStart vbox hintButton PackNatural 10
+
+  -- Track remaining hints
+  remainingHints <- newIORef 3
 
   -- Create a label to display feedback
   feedbackLabel <- labelNew (Just "Enter your guess!")
@@ -176,6 +184,18 @@ launchGUI = do
             else do
               labelSetText feedbackLabel "Try again!"
               modifyIORef currentRow (+1)
+    
+  -- Handle hint button click
+  on hintButton buttonActivated $ do
+    hintsLeft <- readIORef remainingHints
+    if hintsLeft <= 0
+      then labelSetText feedbackLabel "No hints left!"
+      else do
+        -- Generate a random hint
+        randomIndex <- randomRIO (0, length targetWord - 1)
+        let hint = "Hint: The letter at position " ++ show (randomIndex + 1) ++ " is '" ++ [targetWord !! randomIndex] ++ "'."
+        labelSetText feedbackLabel hint
+        modifyIORef remainingHints (\x -> x - 1)  
 
   -- Show everything and start the GTK main loop
   widgetShowAll window
