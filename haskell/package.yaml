@@ -6,6 +6,7 @@ dependencies:
 - hspec
 - gtk3
 - random >= 1.2.1.2
+- directory >= 1.3.8.5
 
 library:
   source-dirs:

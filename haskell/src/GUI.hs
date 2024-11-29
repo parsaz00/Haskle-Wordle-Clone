@@ -92,8 +92,8 @@ import Data.IORef
 import System.Random (randomRIO)
 
 -- Main function to launch the GUI
-launchGUI :: IO ()
-launchGUI = do
+launchGUI :: String -> String -> IO ()
+launchGUI targetWord difficulty = do
   -- Initialize GTK
   initGUI
 
@@ -146,7 +146,7 @@ launchGUI = do
   boxPackStart legendBox grayLegend PackNatural 5
 
   -- Track the current row of guesses
-  let targetWord = "haskell" -- Hardcoded for now
+  -- Load the words from the file
   currentRow <- newIORef 0
 
   -- Handle submit button click
@@ -201,3 +201,4 @@ launchGUI = do
   widgetShowAll window
   on window objectDestroy mainQuit
   mainGUI
+            
