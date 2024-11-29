@@ -47,7 +47,9 @@ grid <- tableNew 6 7 True
 
 We create a grid with 6 rows and 7 columns. By using True, we indicate that the rows and columns should ALL have the same size.
 
+```
 boxPackStart vbox grid PackGrow 0
+```
 
 We add the grid to the vbox. PackGrow allows the vbox to expand the grid and fill any extra space if the window is resized . 0 means no extra padding around the grid 
 
