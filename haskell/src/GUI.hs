@@ -16,9 +16,6 @@ launchGUI targetWord difficulty = do
   window <- windowNew
   set window [windowTitle := "Wordle Game", windowDefaultWidth := 400, windowDefaultHeight := 600]
 
-  -- Dynamic target word
-  targetWord <- return "hi" -- Replace with dynamic logic
-
   -- Create a vertical box layout
   vbox <- vBoxNew False 10
   containerAdd window vbox
