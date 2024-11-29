@@ -55,3 +55,45 @@ We add the grid to the vbox. PackGrow allows the vbox to expand the grid and fil
 
 Overall, by this point, we actually began to apprecaite the inherent flow of operations that the Haskell monad operates in. The way we are building the GUI up comes really naturally , because it has a logical flow to it. We are declaring a layout: Add X to the vbox, and the vbox to the window etc. 
 
+```
+-- Create a 6x7 grid of label widgets initialized with "_"
+labels <- mapM (mapM (\_ -> labelNew (Just "_"))) (replicate 6 (replicate 7 ()))
+
+-- Attach each label to its corresponding position in the grid
+zipWithM_ (\row rowWidgets ->
+    zipWithM_ (\col widget ->
+        tableAttachDefaults grid widget col (col+1) row (row+1))
+    [0..] rowWidgets)
+    [0..] labels
+```
+https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/6ac6833e59d534a69001f8a0cafb7d51132e451c/haskell/src/GUI.hs#L27C2-L33C19
+
+```
+labels <- mapM (mapM (\_ -> labelNew (Just "_"))) (replicate 6 (replicate 7 ()))
+```
+
+replicate 6 (replicate 7 ()): this creates a list of lists filled with (). This will be placeholders for the rows and columns 
+
+
+(\_ -> labelNew (Just "_")): this creates a new GTK label widget, which we initialize with “_”
+These are empty placeholders in the grid, where the guesses will ultimately appears
+
+```
+mapM (mapM ...):
+```
+
+The first mapM applies a monadic action to each row in the list, meaning we fill each row in the grid with “_” The second map applies the same action to every placeholder in a row
+zipWithM_ is like zipWith, but the monadic version of it. It performs the same pairwise combination, but allows side effects (in this case updating our gui) since it operates in a monad 
+We use them like a nested loop 
+The outer zipWithM_ iterates over the rows and then inner zipWithM_ iterates over columns within a row
+zipWithM_ (\row rowWidgets ...) [0..] labels
+Labels is our 6x7 grid of widgets 
+[0..] the indices 
+With this we iterate over each row index (row) and its corresponding row of widgets (rowWidgets)
+zipWithM_ (\col widget ...) [0..] rowWidgets
+For each row of widgets, in the inner lop we iterate over the columns indices (col) and process each widget in that row → we attach the widget to grid at position (row, col)
+tableAttachDefaults grid widget col (col+1) row (row+1)
+This actually places the widget in the grid at the specific row and column 
+grid is the grid container 
+Widget: the label we want to attach 
+col,col+1,row,row+1 are the starting and ending column and row indices respectively 
