@@ -103,3 +103,124 @@ tableAttachDefaults grid widget col (col+1) row (row+1)
 ```
 
 This actually places the widget in the grid at the specific row and column. grid is the grid container. Widget is the label we want to attach. Finally, col,col+1,row,row+1 are the starting and ending column and row indices respectively. 
+
+
+```
+-- Add a text entry for guesses
+input <- entryNew
+boxPackStart vbox input PackNatural 10
+
+-- Add a submit button
+submitButton <- buttonNewWithLabel "Submit"
+boxPackStart vbox submitButton PackNatural 10
+
+-- Add a hint button
+hintButton <- buttonNewWithLabel "Hint"
+boxPackStart vbox hintButton PackNatural 1
+```
+https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/6ac6833e59d534a69001f8a0cafb7d51132e451c/haskell/src/GUI.hs#L35C3-L45C46
+
+Overall, we are adding interactive elements to the GUI here. We create a text input widget where users will be able to enter their text, and then we add it to our vertical box. We also create a button labeled "Submit" and add it to the vertical box. Finally, we create a Hint button, which we add to the vertical box. This is the button users will press if they want to get a hint. 
+
+
+```
+legendBox <- hBoxNew False 10
+boxPackStart vbox legendBox PackNatural 10
+
+greenLegend <- labelNew (Just "🟩 Correct letter & position")
+yellowLegend <- labelNew (Just "🟨 Correct letter, wrong position")
+grayLegend <- labelNew (Just "⬜ Incorrect letter")
+
+boxPackStart legendBox greenLegend PackNatural 5
+boxPackStart legendBox yellowLegend PackNatural 5
+boxPackStart legendBox grayLegend PackNatural 5
+```
+
+Here, we are simply populating our GUI window with a legend that will tell users what the feedback they recieve from their guess actually means. 
+
+```
+-- Handle submit button click
+  on submitButton buttonActivated $ do
+    guess <- entryGetText input
+    row <- readIORef currentRow
+    if row >= length labels
+      then labelSetText feedbackLabel "Game Over! You've used all your guesses."
+      else if length guess /= length targetWord
+        then labelSetText feedbackLabel $ "Guess must be " ++ show (length targetWord) ++ " letters long!"
+        else do
+          -- Get feedback from the game logic
+          let feedback = checkGuess targetWord guess
+
+          -- Update the grid with feedback
+          zipWithM_ (\col char -> labelSetText (labels !! row !! col) [char]) [0..length targetWord - 1] guess
+
+          -- Show feedback using colored symbols (e.g., emojis)
+          zipWithM_ (\col char -> do
+            let label = labels !! row !! col
+            case char of
+              '@' -> labelSetText label "🟩"  -- Green square
+              'O' -> labelSetText label "🟨"  -- Yellow square
+              'X' -> labelSetText label "⬜"  -- Gray square
+            ) [0..length targetWord - 1] feedback
+
+          -- Update feedback label
+          if feedback == replicate (length targetWord) '@'
+            then labelSetText feedbackLabel "Congratulations, you guessed the word!"
+            else do
+              labelSetText feedbackLabel "Try again!"
+              modifyIORef currentRow (+1)
+```
+
+This is the core part of the program's interactivity. Here, we are processing user input and then updating the GUI in response to button clicks. 
+
+```
+on submitButton buttonActivated $ do
+```
+
+Here, we learned about attaching event listeners (similar to what we had done in 210 with our GUI's). Specifically here, we are attaching an event listener to the submitButton. buttonActivated specifies that the event type is a click of the button. Finally $do starts the block of actions that should be executed when the button is clicked. 
+
+```
+guess <- entryGetText input
+```
+Read the text entered in the input field and store it in guess for further processing.
+
+```
+row <- readIORef currentRow
+``` 
+Reads the current value of the mutable currentRow (the index of the grid row being updated)
+
+```
+	if row >= length labels
+ 		 then labelSetText feedbackLabel "Game Over! You've used all your guesses."
+ else if length guess /= length targetWord
+    			then labelSetText feedbackLabel $ "Guess must be " ++ show (length targetWord) ++ " letters long!"
+```
+
+If the user has already used all the rows (i.e., used up all their guesses) then the game is over. In the second part, if the guess length is not correct, we inform the user by updating the GUI with the feedbackLabel 
+
+```
+else do
+  let feedback = checkGuess targetWord guess
+```
+
+This part is us calling the checkGuess function in GameLogic, which we developed for the POC
+
+```
+zipWithM_ (\col char -> labelSetText (labels !! row !! col) [char]) [0..] guess
+```
+
+Iterate through each column index (col) and corresponding letter (char) in the guess 
+
+labels !! row !! col : this selects the label at the current row and column 
+Finally, labelSetText updates the label to display the letter from the guess 
+
+```
+zipWithM_ (\col char -> case char of
+  '@' -> labelSetText (labels !! row !! col) "🟩"
+  'O' -> labelSetText (labels !! row !! col) "🟨"
+  'X' -> labelSetText (labels !! row !! col) "⬜"
+  ) [0..] feedback
+```
+
+We iterate through the indices of feedback and update the grid according to the map with the correct color box emoji . We then call modifyIORef currentRow (+1). This updates the mutable value of currentRow by incrementing it. This ensures that the next guess will appear in the following row 
+
