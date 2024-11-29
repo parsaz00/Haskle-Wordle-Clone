@@ -8,7 +8,7 @@
 1. Clone the repo from https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project.git
 2. Once the repo is cloned, make sure to run **stack clean**
 3. **NOTE: we are assuming you are a mac user**
-4. You will need to run the setup_mac.sh shell script we created that will allow you to run our GUI. It will install necessary packages and dependencies. To be able to run it you need to (1) **chmod +x setup_mac.sh ** will allow you to run the script and (2) then run the command **./setup_mac.sh** to run the script which will set everything up for you
+4. You will need to run the setup_mac.sh shell script we created that will allow you to run our GUI. It will install necessary packages and dependencies. To be able to run it you need to (1) **chmod +x setup_mac.sh** will allow you to run the script and (2) then run the command **./setup_mac.sh** to run the script which will set everything up for you
 5. Run **stack run** and you will now be able to run the GUI and interact with the game
 
 ## Windows Users
