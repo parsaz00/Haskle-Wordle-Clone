@@ -7,8 +7,8 @@ import Data.IORef
 import System.Random (randomRIO)
 
 -- Main function to launch the GUI
-launchGUI :: IO ()
-launchGUI = do
+launchGUI :: String -> String -> IO ()
+launchGUI targetWord difficulty = do
   -- Initialize GTK
   initGUI
 
@@ -53,6 +53,10 @@ launchGUI = do
   -- Create a label to display feedback
   feedbackLabel <- labelNew (Just "Enter your guess!")
   boxPackStart vbox feedbackLabel PackNatural 10
+
+  -- Create a label to display difficulty
+  difficultyLabel <- labelNew ((Just $ "Difficulty: " ++ difficulty))
+  boxPackStart vbox difficultyLabel PackNatural 10
 
   -- Add a legend to explain the colors
   legendBox <- hBoxNew False 10
@@ -117,3 +121,4 @@ launchGUI = do
   widgetShowAll window
   on window objectDestroy mainQuit
   mainGUI
+            

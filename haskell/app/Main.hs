@@ -3,6 +3,8 @@ module Main where
 import System.IO (hFlush, stdout)
 import GameLogic (checkGuess)
 import GUI (launchGUI)
+import System.Random (randomRIO)
+import System.Directory(doesFileExist)
 
 -- Function to run one round of the game
 runGame :: String -> IO ()
@@ -31,7 +33,14 @@ main :: IO ()
 -- main = playWordle
 
 -- Gui Based
-main = launchGUI
+main = do
+    -- Generate a word and its difficulty
+    result <- generateWord "Words.txt"
+    case result of
+        Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
+        Just (targetWord, difficulty) -> do
+            -- Pass the generated word and difficulty to launchGUI
+            launchGUI targetWord difficulty
 
 
 -- Dictionary of alphabet letters and corresponding riddles with CS terms
@@ -147,4 +156,33 @@ getFirstIncorrectLetter secret guess =
     let zippedPairs = zip secret guess
         incorrectLetters = [s | (s, g) <- zippedPairs, s /= g]
     in if null incorrectLetters then Nothing else Just (head incorrectLetters)
-    
+
+loadWords :: FilePath -> IO [(String, String)]
+loadWords filePath = do
+    exists <- doesFileExist filePath
+    if not exists
+        then error "Error: Words file does not exist."
+        else do
+            content <- readFile filePath
+            return $ parseWords content
+
+-- Function to parse the simplified word list
+parseWords :: String -> [(String, String)]
+parseWords content = 
+    [ (word, difficulty) 
+    | line <- lines content
+    , let (word, difficulty) = break (== ' ') line
+    , not (null difficulty) -- Ensure the line contains both word and difficulty
+    , let difficulty' = drop 1 difficulty -- Remove the leading space
+    ]
+
+-- Function to generate a random word and difficulty
+generateWord :: FilePath -> IO (Maybe (String, String))
+generateWord filePath = do
+    wordsList <- loadWords filePath
+    if null wordsList
+        then return Nothing -- File is empty or could not be loaded
+        else do
+            -- Get a random word
+            randomIndex <- randomRIO (0, length wordsList - 1)
+            return $ Just (wordsList !! randomIndex)
