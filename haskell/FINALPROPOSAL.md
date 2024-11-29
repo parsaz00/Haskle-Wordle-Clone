@@ -82,18 +82,24 @@ These are empty placeholders in the grid, where the guesses will ultimately appe
 mapM (mapM ...):
 ```
 
-The first mapM applies a monadic action to each row in the list, meaning we fill each row in the grid with “_” The second map applies the same action to every placeholder in a row
-zipWithM_ is like zipWith, but the monadic version of it. It performs the same pairwise combination, but allows side effects (in this case updating our gui) since it operates in a monad 
-We use them like a nested loop 
-The outer zipWithM_ iterates over the rows and then inner zipWithM_ iterates over columns within a row
+The first mapM applies a monadic action to each row in the list, meaning we fill each row in the grid with (“_”)
+The second map applies the same action to every placeholder in a row
+zipWithM_ is like zipWith, but the monadic version of it. It performs the same pairwise combination, but allows side effects (in this case updating our gui) since it operates in a monad . We use them like a nested loop. The outer zipWithM_ iterates over the rows and then inner zipWithM_ iterates over columns within a row
+```
 zipWithM_ (\row rowWidgets ...) [0..] labels
-Labels is our 6x7 grid of widgets 
-[0..] the indices 
+```
+
+Labels is our 6x7 grid of widgets [0..] are the indices 
+
 With this we iterate over each row index (row) and its corresponding row of widgets (rowWidgets)
+```
 zipWithM_ (\col widget ...) [0..] rowWidgets
+```
+
 For each row of widgets, in the inner lop we iterate over the columns indices (col) and process each widget in that row → we attach the widget to grid at position (row, col)
+
+```
 tableAttachDefaults grid widget col (col+1) row (row+1)
-This actually places the widget in the grid at the specific row and column 
-grid is the grid container 
-Widget: the label we want to attach 
-col,col+1,row,row+1 are the starting and ending column and row indices respectively 
+```
+
+This actually places the widget in the grid at the specific row and column. grid is the grid container. Widget is the label we want to attach. Finally, col,col+1,row,row+1 are the starting and ending column and row indices respectively. 
