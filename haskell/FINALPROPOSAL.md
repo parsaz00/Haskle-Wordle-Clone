@@ -18,4 +18,6 @@ launchGUI targetWord difficulty = do
   window <- windowNew
   set window [windowTitle := "Wordle Game", windowDefaultWidth := 400, windowDefaultHeight := 600]
 
+  https://github.students.cs.ubc.ca/parsaz00/cpsc-312-project/blob/6ac6833e59d534a69001f8a0cafb7d51132e451c/haskell/src/GUI.hs#L9C1-L17C99
+
   Here, we start with initializng the library with initGUI. Since we are working with a GUI (which will have many side effects) we need all the the GUI actions to be side effects, which makes the use of IO monads perfect, so that we can handle all the side effects appropriately. Furthermore, the way our GUI works is almost hierarchical in terms of creating the different aspects of it. Since the GUI requires specific sequences of operations (ex: creating a window, then adding a button, then showing the window), the Monad and its natural handling of this flow of operations was perfect. Using online tools like the documentation for gtk3 and chatGPT, we were able to figure out how to initialize our GUI. Finally, set window [windowTitle := "Wordle Game", windowDefaultWidth := 400, windowDefaultHeight := 600] is used to actually set the properties of our GUI window, including the title and the dimensions. 
