@@ -6,6 +6,21 @@ import Control.Monad (zipWithM_, when)
 import Data.IORef
 import System.Random (randomRIO)
 
+-- Example function to generate a random word
+generateNewTargetWord :: FilePath -> IO (Maybe (String, String))
+generateNewTargetWord filePath = do
+  fileContent <- readFile filePath
+  let wordList = map parseLine (lines fileContent)
+  if null wordList
+    then return Nothing
+    else do
+      randomIndex <- randomRIO (0, length wordList - 1)
+      return (Just (wordList !! randomIndex))
+  where
+    parseLine line = 
+      let parts = words line
+      in (head parts, unwords (tail parts)) -- Splits the line into word and difficulty
+
 -- Main function to launch the GUI
 launchGUI :: String -> String -> IO ()
 launchGUI targetWord difficulty = do
@@ -71,12 +86,19 @@ launchGUI targetWord difficulty = do
   -- Track the current row of guesses
   currentRow <- newIORef 0
 
+  -- Add a "Retry" button (initially hidden)
+  retryButton <- buttonNewWithLabel "New Game"
+  boxPackStart vbox retryButton PackNatural 10
+  widgetHide retryButton
+
   -- Handle submit button click
   on submitButton buttonActivated $ do
     guess <- entryGetText input
     row <- readIORef currentRow
     if row >= length labels
-      then labelSetText feedbackLabel "Game Over! You've used all your guesses."
+      then do
+        labelSetText feedbackLabel "Game Over! You've used all your guesses."
+        widgetShow retryButton
       else if length guess /= length targetWord
         then labelSetText feedbackLabel $ "Guess must be " ++ show (length targetWord) ++ " letters long!"
         else do
@@ -97,7 +119,9 @@ launchGUI targetWord difficulty = do
 
           -- Update feedback label
           if feedback == replicate (length targetWord) '@'
-            then labelSetText feedbackLabel "Congratulations, you guessed the word!"
+            then do
+              labelSetText feedbackLabel "Congratulations, you guessed the word!"
+              widgetShow retryButton
             else do
               labelSetText feedbackLabel "Try again!"
               modifyIORef currentRow (+1)
@@ -114,8 +138,15 @@ launchGUI targetWord difficulty = do
         labelSetText feedbackLabel hint
         modifyIORef remainingHints (\x -> x - 1)  
 
+-- Handle retry button click
+  on retryButton buttonActivated $ do
+    widgetDestroy window -- Close the current window
+    result <- generateNewTargetWord "/Users/Daichi/Documents/School/CPSC312-2024 Winter/cpsc-312-project/haskell/Words.txt"
+    case result of
+      Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
+      Just (newTargetWord, newDifficulty) -> launchGUI newTargetWord newDifficulty
+
   -- Show everything and start the GTK main loop
   widgetShowAll window
   on window objectDestroy mainQuit
   mainGUI
-            
