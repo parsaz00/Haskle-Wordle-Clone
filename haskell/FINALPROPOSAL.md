@@ -22,7 +22,8 @@ One of the main things our group had to learn to be able to build out our MVP wa
 Parsa + Daichi overall learning + contribution learning had to MVP:
 
 One of the essential parts in making our MVP work was being able to handle side effects using the IO monad, as we had to make a GUI. GUI development is imperative and side-effect driven, but the functional paradigm of Haskell required us to encapsulate these side effects carefully, ensuring that our program maintained a clear and predictable flow of operations. This is clear in our hierarchical GUI design, where we created layouts, widgets, and event handlers in a logical sequence, leveraging **monadic flow** to manage the dependencies between these actions. We also learned how to use the GKT+3 toolking through the gtk3 library to create and structure our GUI. From understanding layout management with containers like VBox and Grid to dynamically populating widgets like labels and buttons, we experienced firsthand the power of functional abstractions for declarative GUI construction. It was especially fun to use higher-order functions such as zipWithM_ to programmatically populate grids: this deepened our appreciation for Haskell's ability to elegantly manage complex iterations with conscise and expressive code. State management with IORef was another critical learning area. GUIs often require mutable state, such as tracking the current row of guesses or the number of remaining hints. By using IORef, we were able to maintain and update this state functionally while preserving the overall purity of our program. Additionally, integrating event-driven programming using constructs like 
-```on ... buttonActivated
+```
+on ... buttonActivated
 ```
 taught us how to attach interactivity to our GUI and handle user inputs dynamically.
 
