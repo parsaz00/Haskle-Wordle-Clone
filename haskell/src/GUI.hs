@@ -141,7 +141,7 @@ launchGUI targetWord difficulty = do
 -- Handle retry button click
   on retryButton buttonActivated $ do
     widgetDestroy window -- Close the current window
-    result <- generateNewTargetWord "/Users/Daichi/Documents/School/CPSC312-2024 Winter/cpsc-312-project/haskell/Words.txt"
+    result <- generateNewTargetWord "haskell/Words.txt"
     case result of
       Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
       Just (newTargetWord, newDifficulty) -> launchGUI newTargetWord newDifficulty
