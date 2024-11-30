@@ -15,11 +15,19 @@
 
 # Guide to MVP + Learning done
 
-"Parsa + Daichi"
+### Parsa + Daichi
 
 One of the main things our group had to learn to be able to build out our MVP was to learn how to create a GUI in Haskell. This was a challenging undertaking, but we had a lot of fun (and a bit of stress) creating it. As we know, Haskeell is a functional language, meaning it emphasizes immutability and pure functions, which in turn means that functions have no side effects. This obivously presents a challenge, because a GUI is the "king" of side effects. Furthermore, Haskell doesn't have a mainstream or well agreed upon native GUI framework built into its ecosystem. So we had to learn and rely on the GTK+3 toolkit to be able to build out the GUI. By using the `gtk3` library, we were able to leverage its framework for GUI creation, as it provides Haskell bindings to GTK+3, allowing us to access its widgets and event-driven programming model. 
 
-Parsa + Daichi overall learning + contribution learning had to MVP:
+Here are some of the highlighted learning we've done throughout the implementation of the GUI: 
+1. **File I/O:** The generateNewTargetWord function demonstrates how to read a file and process its content. Using readFile to load data and map to transform it into a usable list is a common pattern for handling external data in Haskell.
+2. **Randomization**: Using randomRIO to generate random indices from a list shows how randomness can be incorporated into a program. This is useful for any functionality where unpredictability or variety is required.
+3. **State Management with IORe**f: The use of IORef to store and modify mutable state, like the number of remaining hints, is a key Haskell concept for managing side effects. In this case, it tracks the number of hints left throughout the game.
+4. **Modifying State**: Using modifyIORef to update the value of remainingHints is an important skill for mutating state in Haskell, as it combines functional programming principles with IO-based side effects.
+5. **Pattern Matching**: The generateNewTargetWord function also reinforces the importance of pattern matching in Haskell, especially when handling cases like Nothing and Just for the result of the random word generation.
+
+
+### Parsa + Daichi overall learning + contribution learning had to MVP:
 
 One of the essential parts in making our MVP work was being able to handle side effects using the IO monad, as we had to make a GUI. GUI development is imperative and side-effect driven, but the functional paradigm of Haskell required us to encapsulate these side effects carefully, ensuring that our program maintained a clear and predictable flow of operations. This is clear in our hierarchical GUI design, where we created layouts, widgets, and event handlers in a logical sequence, leveraging **monadic flow** to manage the dependencies between these actions. We also learned how to use the GKT+3 toolking through the gtk3 library to create and structure our GUI. From understanding layout management with containers like VBox and Grid to dynamically populating widgets like labels and buttons, we experienced firsthand the power of functional abstractions for declarative GUI construction. It was especially fun to use higher-order functions such as zipWithM_ to programmatically populate grids: this deepened our appreciation for Haskell's ability to elegantly manage complex iterations with conscise and expressive code. State management with IORef was another critical learning area. GUIs often require mutable state, such as tracking the current row of guesses or the number of remaining hints. By using IORef, we were able to maintain and update this state functionally while preserving the overall purity of our program. Additionally, integrating event-driven programming using constructs like 
 ```
@@ -282,15 +290,3 @@ This is handled through the following steps:
 1. Button Event Handling: The on retryButton buttonActivated event listens for the click of the "Retry" button.
 2. Loading a New Word: The function generateNewTargetWord reads a file that contains a list of words, selects a random word, and returns it as the new target word for the game.
 3. Launching the GUI: After obtaining a new word, the GUI is relaunched with the new target word and difficulty.
-
-Throughout the implementation of the hint and retry functionality, several key Haskell concepts and skills were reinforced:
-
-1. **File I/O:** The generateNewTargetWord function demonstrates how to read a file and process its content. Using readFile to load data and map to transform it into a usable list is a common pattern for handling external data in Haskell.
-2. **Randomization**: Using randomRIO to generate random indices from a list shows how randomness can be incorporated into a program. This is useful for any functionality where unpredictability or variety is required.
-3. **Event Handling in GUIs**: Implementing event handlers for button clicks (buttonActivated) using on shows how Haskell can be used for interactive GUI applications. These handlers allow us to define the logic of the program when the user interacts with the interface.
-4. **State Management with IORe**f: The use of IORef to store and modify mutable state, like the number of remaining hints, is a key Haskell concept for managing side effects. In this case, it tracks the number of hints left throughout the game.
-5. **Modifying State**: Using modifyIORef to update the value of remainingHints is an important skill for mutating state in Haskell, as it combines functional programming principles with IO-based side effects.
-6. **Pattern Matching**: The generateNewTargetWord function also reinforces the importance of pattern matching in Haskell, especially when handling cases like Nothing and Just for the result of the random word generation.
-
-
-
