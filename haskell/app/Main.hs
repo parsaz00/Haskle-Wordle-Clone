@@ -29,18 +29,18 @@ playWordle = do
       else putStrLn "Thanks for playing!"
 
 main :: IO ()
--- Terminal based
--- main = playWordle
-
--- Gui Based
 main = do
-    -- Generate a word and its difficulty
-    result <- generateWord "Words.txt"
-    case result of
-        Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
-        Just (targetWord, difficulty) -> do
-            -- Pass the generated word and difficulty to launchGUI
-            launchGUI targetWord difficulty
+    let filePath = "haskell/Words.txt" -- Relative path from Main.hs to Words.txt
+    fileExists <- doesFileExist filePath
+    if not fileExists
+        then putStrLn $ "Error: File '" ++ filePath ++ "' does not exist in the expected directory."
+        else do
+            result <- generateWord filePath
+            case result of
+                Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
+                Just (targetWord, difficulty) -> do
+                    launchGUI targetWord difficulty
+
 
 
 -- Dictionary of alphabet letters and corresponding riddles with CS terms
