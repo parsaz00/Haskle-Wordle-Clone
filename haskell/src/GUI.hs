@@ -134,7 +134,7 @@ launchGUI targetWord difficulty = do
       else do
         -- Generate a random hint
         randomIndex <- randomRIO (0, length targetWord - 1)
-        let hint = "Hint: The letter at position " ++ show (randomIndex + 1) ++ " is '" ++ [targetWord !! randomIndex] ++ "'."
+        let hint = "Hint: The letter at position " ++ show (randomIndex + 1) ++ " is '" ++ [targetWord !! randomIndex] ++ "'." ++ "\n" ++ "Riddle: " ++ getRiddle4GUI targetWord ++ "."
         labelSetText feedbackLabel hint
         modifyIORef remainingHints (\x -> x - 1)  
 
@@ -150,3 +150,39 @@ launchGUI targetWord difficulty = do
   widgetShowAll window
   on window objectDestroy mainQuit
   mainGUI
+
+riddles4GUI :: [(String, String)]
+riddles4GUI = 
+    [ ("algorithm", "I am the foundation of any program, guiding the process step by step."),
+      ("binary", "I am a fundamental data structure branching out like limbs."), 
+      ("cpu", "I am the processing unit that executes instructions."),
+      ("dictionary", "I am a data structure used for quick key-based lookups."),
+      ("exception", "I represent an unexpected condition in a program's execution."),
+      ("function", "I represent a reusable block of code in programming."),
+      ("graph", "I am a structure made of nodes and edges."),
+      ("hash", "I map keys to values using a specialized function."),
+      ("index", "I am a structured lookup system to fetch or locate data."),
+      ("java", "I am a widely-used programming language for building websites."),
+      ("kernel", "I am the core of an operating system managing resources."),
+      ("lambda", "I am a Greek letter often used in functional programming."),
+      ("model", "I am a mathematical representation used to make predictions."),
+      ("network", "I enable devices to exchange data and communicate."),
+      ("optimization", "I am the act of improving performance or efficiency."),
+      ("python", "I am a popular language for scripting and dynamic applications."),
+      ("queue", "I am a structure for managing tasks in a specific order."),
+      ("query", "I represent a method for retrieving data."),
+      ("sql", "I am a standard language used to interact with databases."),
+      ("thread", "I allow concurrent execution of code sequences."),
+      ("usability", "I describe the quality of interaction between a user and a system."),
+      ("version", "I help track changes in source code over time."),
+      ("widget", "I am a reusable component in graphical user interfaces."),
+      ("testing", "I ensure that new changes don't break existing functionality."),
+      ("yaml", "I am a data-serialization standard often used for configuration files."),
+      ("zip", "I am a method to compress files into smaller sizes.")
+    ]
+
+-- Helper to get riddle for a the wordleWordGUI
+getRiddle4GUI :: String -> String
+getRiddle4GUI wordleWord
+    | Just riddle <- lookup wordleWord riddles4GUI = riddle
+    | otherwise = "No riddle available for this word."
