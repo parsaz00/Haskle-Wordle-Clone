@@ -240,3 +240,53 @@ zipWithM_ (\col char -> case char of
 
 We iterate through the indices of feedback and update the grid according to the map with the correct color box emoji . We then call modifyIORef currentRow (+1). This updates the mutable value of currentRow by incrementing it. This ensures that the next guess will appear in the following row 
 
+### Hint Button
+```
+on hintButton buttonActivated $ do
+  hintsLeft <- readIORef remainingHints
+  if hintsLeft <= 0
+    then labelSetText feedbackLabel "No hints left!"
+    else do
+      randomIndex <- randomRIO (0, length targetWord - 1)
+      let hint = "Hint: The letter at position " ++ show (randomIndex + 1) ++ " is '" ++ [targetWord !! randomIndex] ++ "'."
+      labelSetText feedbackLabel hint
+      modifyIORef remainingHints (\x -> x - 1)
+```
+The "Hint" button provides players with helpful hints during gameplay. When clicked, the button will check if there are any remaining hints available. If there are, a random letter from the target word is revealed, with its position in the word displayed to the player. If no hints are left, the player will be informed with the message "No hints left!".
+
+The logic for this is handled in the following way:
+1. Button Event Handling: The on hintButton buttonActivated event listens for when the player clicks the "Hint" button.
+2. Hint Availability Check: The number of available hints is tracked using an IORef called remainingHints. If there are no hints left, a message is displayed to the player.
+3. Generating and Displaying a Hint: If hints are available, a random index from the target word is selected, and the corresponding letter is displayed in the form of a hint.
+4. Updating the Remaining Hints: Each time a hint is used, the number of remaining hints is decremented by one.
+Here’s a simplified version of the relevant code:
+
+### Retry Button
+```
+on retryButton buttonActivated $ do
+  widgetDestroy window
+  result <- generateNewTargetWord "/path/to/Words.txt"
+  case result of
+    Nothing -> putStrLn "Error: Words file could not be loaded or is empty."
+    Just (newTargetWord, newDifficulty) -> launchGUI newTargetWord newDifficulty
+```
+
+The "Retry" button allows the player to start a new game by generating a new random target word and launching the GUI again. When the "Retry" button is clicked, a new word is selected from a file, and a new game session begins.
+
+This is handled through the following steps:
+
+1. Button Event Handling: The on retryButton buttonActivated event listens for the click of the "Retry" button.
+2. Loading a New Word: The function generateNewTargetWord reads a file that contains a list of words, selects a random word, and returns it as the new target word for the game.
+3. Launching the GUI: After obtaining a new word, the GUI is relaunched with the new target word and difficulty.
+
+Throughout the implementation of the hint and retry functionality, several key Haskell concepts and skills were reinforced:
+
+1. **File I/O:** The generateNewTargetWord function demonstrates how to read a file and process its content. Using readFile to load data and map to transform it into a usable list is a common pattern for handling external data in Haskell.
+2. **Randomization**: Using randomRIO to generate random indices from a list shows how randomness can be incorporated into a program. This is useful for any functionality where unpredictability or variety is required.
+3. **Event Handling in GUIs**: Implementing event handlers for button clicks (buttonActivated) using on shows how Haskell can be used for interactive GUI applications. These handlers allow us to define the logic of the program when the user interacts with the interface.
+4. **State Management with IORe**f: The use of IORef to store and modify mutable state, like the number of remaining hints, is a key Haskell concept for managing side effects. In this case, it tracks the number of hints left throughout the game.
+5. **Modifying State**: Using modifyIORef to update the value of remainingHints is an important skill for mutating state in Haskell, as it combines functional programming principles with IO-based side effects.
+6. **Pattern Matching**: The generateNewTargetWord function also reinforces the importance of pattern matching in Haskell, especially when handling cases like Nothing and Just for the result of the random word generation.
+
+
+
