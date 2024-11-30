@@ -19,7 +19,7 @@
 
 One of the main things our group had to learn to be able to build out our MVP was to learn how to create a GUI in Haskell. This was a challenging undertaking, but we had a lot of fun (and a bit of stress) creating it. As we know, Haskeell is a functional language, meaning it emphasizes immutability and pure functions, which in turn means that functions have no side effects. This obivously presents a challenge, because a GUI is the "king" of side effects. Furthermore, Haskell doesn't have a mainstream or well agreed upon native GUI framework built into its ecosystem. So we had to learn and rely on the GTK+3 toolkit to be able to build out the GUI. By using the `gtk3` library, we were able to leverage its framework for GUI creation, as it provides Haskell bindings to GTK+3, allowing us to access its widgets and event-driven programming model. 
 
-Here are some of the highlighted learning we've done throughout the implementation of the GUI: 
+Some of the highlighted learning we've done throughout the implementation of the GUI: 
 1. **File I/O:** The generateNewTargetWord function demonstrates how to read a file and process its content. Using readFile to load data and map to transform it into a usable list is a common pattern for handling external data in Haskell.
 2. **Randomization**: Using randomRIO to generate random indices from a list shows how randomness can be incorporated into a program. This is useful for any functionality where unpredictability or variety is required.
 3. **State Management with IORe**f: The use of IORef to store and modify mutable state, like the number of remaining hints, is a key Haskell concept for managing side effects. In this case, it tracks the number of hints left throughout the game.
